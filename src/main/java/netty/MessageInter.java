@@ -1,5 +1,7 @@
 package netty;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  *  netty服务通信消息
  *
@@ -8,4 +10,5 @@ package netty;
  */
 public interface MessageInter {
 
+    void writeByte(ByteBuf outStream);
 }
