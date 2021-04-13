@@ -10,6 +10,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 
+import java.util.concurrent.ThreadFactory;
+
 /**
  *  netty服务器
  *
@@ -20,12 +22,12 @@ public class NettyService {
 
     private int port;
 
-    public NettyService(int port, final MessageHandlerInter messageHandler) {
+    public NettyService(int port, final MessageHandlerInter messageHandler, final ThreadFactory threadFactory) {
         ServerBootstrap bootstrap = new ServerBootstrap();
         this.port = port;
-        NioEventLoopGroup boss = new NioEventLoopGroup();
+        NioEventLoopGroup boss = new NioEventLoopGroup(NettyConfig.DEFAULT_BOSS_THREAD_NUM, threadFactory);
         int cpuNum = Runtime.getRuntime().availableProcessors();
-        NioEventLoopGroup worker = new NioEventLoopGroup(cpuNum);
+        NioEventLoopGroup worker = new NioEventLoopGroup(cpuNum, threadFactory);
         try {
             bootstrap.group(boss, worker)
                 .channel(NioServerSocketChannel.class)

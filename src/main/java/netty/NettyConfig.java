@@ -10,6 +10,8 @@ public class NettyConfig {
 
     public static final int DEFAULT_SERVER_CONNECTION_PORT = 1;
 
+    public static final int DEFAULT_BOSS_THREAD_NUM = 1;
+
     public static final int DEFAULT_LENGTH_SIZE = 4;
 
     public static final String SERVER_CONFIG_PROPERTIES_NAME = "test.properties";
